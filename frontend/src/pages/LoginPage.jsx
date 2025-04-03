@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
-
+import { parseJwt } from '../services/api';
 const LoginPage = () => {
     const navigate = useNavigate();
   const [userName, setUserName] = useState('');
@@ -14,7 +14,13 @@ const LoginPage = () => {
 
     try {
         const result = await loginUser(userName, password);
-        console.log('Giriş başarılı:', result);
+        const token = result.token;
+        localStorage.setItem('token', token);
+        
+        const userInfo = parseJwt(token);
+        console.log('Çözülmüş kullanıcı bilgisi:', userInfo);
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
         navigate('/invoices');
         // Yönlendirme gibi bir şey yapacaksan buraya ekleyebilirsin
         // navigate('/invoices'); örneğin

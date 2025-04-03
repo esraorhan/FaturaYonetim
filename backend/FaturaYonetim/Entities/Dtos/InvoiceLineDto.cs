@@ -12,6 +12,7 @@ namespace Entities.Dtos
         public int? InvoiceLineId { get; set; } // Güncelleme için
         public string ItemName { get; set; }
         public int Quentity { get; set; }
+        public int UserId { get; set; }
         public decimal Price { get; set; }
     }
 }

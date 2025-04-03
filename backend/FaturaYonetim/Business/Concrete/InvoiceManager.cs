@@ -62,6 +62,7 @@ namespace Business.Concrete
             invoice.InvoiceNumber = dto.InvoiceNumber;
             invoice.InvoiceDate = dto.InvoiceDate;
             invoice.TotalAmount = dto.TotalAmount;
+            invoice.UserId = dto.UserId;
             _invoiceDal.UPDATE(invoice);
 
             // 2️⃣ Mevcut satırları al
@@ -94,6 +95,7 @@ namespace Business.Concrete
                         existing.ItemName = lineDto.ItemName;
                         existing.Quentity = lineDto.Quentity;
                         existing.Price = lineDto.Price;
+                        existing.UserId = lineDto.UserId;
                         _invoiceLineDal.UPDATE(existing);
                     }
                 }
@@ -147,7 +149,8 @@ namespace Business.Concrete
                     {
                         ItemName = l.ItemName,
                         Quentity = l.Quentity,
-                        Price = l.Price
+                        Price = l.Price,
+                        InvoiceLineId=l.InvoiceLineId,
                     }).ToList()
             }).ToList();
 
